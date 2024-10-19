@@ -11,8 +11,13 @@ from api.v1.order.serializers import OrderCreateSerializer, UserOrderSerializer
 
 class OrderCreateGenerics(generics.GenericAPIView):
     serializer_class = OrderCreateSerializer
-    parser_classes = (FormParser, MultiPartParser)
     permission_classes = (permissions.IsAuthenticated,)
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return UserOrderSerializer
+        else:
+            return OrderCreateSerializer
+    
     def post(self, *args, **kwargs):
         serializer = OrderCreateSerializer(data=self.request.data)
         if serializer.is_valid():

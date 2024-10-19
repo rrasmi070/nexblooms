@@ -21,7 +21,7 @@ urlpatterns = [
     path('product/products/', ProductsGenerics.as_view(),name='products'),
     path('product/addproducts/', AddProductsGenerics.as_view(),name='addproducts'),
     
-    path('order/create_order/', AddProductsGenerics.as_view(),name='create_order'),
+    path('order/create_order/', OrderCreateGenerics.as_view(),name='create_order'),
     
     
     path('product/product-details/', OrderCreateGenerics.as_view(),name='product-details'),
