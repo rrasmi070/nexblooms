@@ -126,3 +126,19 @@ class ProductImages(models.Model):
     image = models.FileField(upload_to='products/')
     class Meta:
         db_table = "products_images"
+
+
+
+class Orders(models.Model):
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    created_by=models.ForeignKey(UserMaster, on_delete=models.CASCADE, related_name='created_by_order')
+    created_at = models.DateTimeField(auto_now=True)
+    updated_by=models.ForeignKey(UserMaster, on_delete=models.CASCADE, related_name='uploaded_by_order')    
+    updated_at = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=True)
+    quantity = models.IntegerField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    weight = models.FloatField()    
+
+    class Meta:
+        db_table = "orders"

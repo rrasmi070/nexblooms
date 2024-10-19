@@ -4,8 +4,9 @@ from rest_framework.response import Response
 ## Swagger
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from rest_framework.parsers import FormParser, MultiPartParser
 
-from api.v1.products.serializer import ProductsAllSerializer
+from api.v1.products.serializer import ProductsAddSerializer, ProductsAllSerializer
 
 
 class CategoryGenerics(generics.GenericAPIView):
@@ -22,7 +23,20 @@ class BrandGenerics(generics.GenericAPIView):
         return Response(context, status=status.HTTP_200_OK)
         
         
+class AddProductsGenerics(generics.GenericAPIView):
+    serializer_class = ProductsAddSerializer
+    parser_classes = (FormParser, MultiPartParser)
         
+    def post(self, *args, **kwargs):
+        serializer = ProductsAddSerializer(data=self.request.data)
+        if serializer.is_valid():
+            serializer.save()
+            context = {'status': True,'message': 'Product created successfully','data': serializer.data}
+            return Response(context, status=status.HTTP_200_OK)
+        else:
+            context = {'status': False,'message': serializer.errors}
+            return Response(context, status=status.HTTP_200_OK)
+    
 
 class ProductsGenerics(generics.GenericAPIView):
     serializer_class = ProductsAllSerializer
@@ -51,3 +65,6 @@ class ProductsDetailsGenerics(generics.GenericAPIView):
         context = {'status': True,'message': serializer.data}
         return Response(context, status=status.HTTP_200_OK)
         
+
+    
+    
