@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Password Changed Successfully</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <!-- Additional custom styles -->
+  <style>
+    .success-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full viewport height for centering */
+      background-color: #f9f9f9;
+    }
+
+    .success-box {
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .success-box.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .alert {
+      text-align: center;
+    }
+  </style>
+</head>
+<body onload="showSuccessBox()">
+  <div class="container success-wrapper">
+    <div class="success-box">
+      <h2>Password Changed Successfully!</h2>
+      <div class="alert alert-success">
+        <strong>Success!</strong> Your password has been changed.
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap and Optional JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <!-- JavaScript for animation -->
+  <script>
+    function showSuccessBox() {
+      document.querySelector('.success-box').classList.add('active');
+    }
+  </script>
+</body>
+</html>
